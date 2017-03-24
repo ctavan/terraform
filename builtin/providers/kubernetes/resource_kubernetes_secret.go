@@ -79,7 +79,7 @@ func resourceKubernetesSecretRead(d *schema.ResourceData, meta interface{}) erro
 		return err
 	}
 
-	d.Set("data", secret.StringData)
+	d.Set("data", secret.Data)
 
 	return nil
 }
