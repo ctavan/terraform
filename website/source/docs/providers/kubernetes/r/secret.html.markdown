@@ -31,6 +31,7 @@ The following arguments are supported:
 
 * `data` - (Optional) A map of the secret data.
 * `metadata` - (Required) Standard secret's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
+* `type` - (Optional) The secret type, defaults to `Opaque`. Other common types involve `kubernetes.io/tls` which is what gets created when using `kubectl create secret tls` and which can be used for TLS Ingresses. Changing this value forces recreation of the secret. More info: https://kubernetes.io/docs/user-guide/kubectl/kubectl_create_secret_tls/ and https://github.com/kubernetes/ingress/blob/master/controllers/gce/README.md#tls
 
 ## Nested Blocks
 

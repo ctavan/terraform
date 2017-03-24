@@ -27,6 +27,12 @@ func resourceKubernetesSecret() *schema.Resource {
 				Description: "A map of the secret data.",
 				Optional:    true,
 			},
+			"type": {
+				Type:        schema.TypeString,
+				Description: "The secret type.",
+				Optional:    true,
+				ForceNew:    true,
+			},
 		},
 	}
 }
@@ -38,6 +44,10 @@ func resourceKubernetesSecretCreate(d *schema.ResourceData, meta interface{}) er
 	secret := api.Secret{
 		ObjectMeta: metadata,
 		StringData: expandStringMap(d.Get("data").(map[string]interface{})),
+	}
+
+	if v, ok := d.GetOk("type"); ok {
+		secret.Type = api.SecretType(v.(string))
 	}
 
 	log.Printf("[INFO] Creating new secret: %#v", secret)
